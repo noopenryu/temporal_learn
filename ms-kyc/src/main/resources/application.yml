@@ -1,0 +1,32 @@
+server:
+  port: ${PORT:8085}
+
+spring:
+  application:
+    name: ms-kyc
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/kyc_db}
+    username: ${SPRING_DATASOURCE_USERNAME:temporal}
+    password: ${SPRING_DATASOURCE_PASSWORD:temporal}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+    show-sql: false
+
+temporal:
+  target: ${TEMPORAL_TARGET:localhost:7233}
+  namespace: ${TEMPORAL_NAMESPACE:default}
+  task-queue: ${TEMPORAL_TASK_QUEUE:KYC_ONBOARDING_TASK_QUEUE}
+  worker:
+    enabled: ${TEMPORAL_WORKER_ENABLED:true}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

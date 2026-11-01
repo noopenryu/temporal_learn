@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%thread] %-5level %logger{36} [trace_id=%X{trace_id:-}] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <http>
+            <url>${LOKI_URL:-http://localhost:3100}/loki/api/v1/push</url>
+        </http>
+        <format>
+            <label>
+                <pattern>service=ms-kyc,env=local,level=%level</pattern>
+            </label>
+            <message>
+                <pattern>{"timestamp":"%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}","level":"%level","service":"ms-kyc","env":"local","trace_id":"%X{trace_id:-}","span_id":"%X{span_id:-}","parent_span_id":"%X{parent_span_id:-}","customer_id":"%X{customer_id:-}","message":"%replace(%msg){'[\r\n\t]', ' '}"}</pattern>
+            </message>
+        </format>
+        <batchTimeoutMs>500</batchTimeoutMs>
+        <batchMaxItems>50</batchMaxItems>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="LOKI" />
+    </root>
+</configuration>
