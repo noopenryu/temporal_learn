@@ -97,6 +97,49 @@ services:
     ports:
       - 8080:8080
 
+  loki:
+    image: grafana/loki:3.3.2
+    container_name: temporal-loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki/local-config.yaml:/etc/loki/local-config.yaml
+      - temporal_loki_vol:/loki
+    networks:
+      - temporal-network
+
+  grafana:
+    image: grafana/grafana:11.5.1
+    container_name: temporal-grafana
+    ports:
+      - "3002:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - temporal_grafana_vol:/var/lib/grafana
+    depends_on:
+      - loki
+    networks:
+      - temporal-network
+
+  promtail:
+    image: grafana/promtail:3.3.2
+    container_name: temporal-promtail
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./promtail/promtail-config.yaml:/etc/promtail/config.yaml
+    command: -config.file=/etc/promtail/config.yaml
+    depends_on:
+      - loki
+    networks:
+      - temporal-network
+
 networks:
   temporal-network:
     driver: bridge
@@ -104,3 +147,5 @@ networks:
 
 volumes:
   temporal_postgresql_vol:
+  temporal_loki_vol:
+  temporal_grafana_vol:
