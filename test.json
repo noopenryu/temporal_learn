@@ -1,0 +1,164 @@
+"lsp": {
+  "jdtls": {
+    "initialization_options": {
+      "bundles": [],
+      // The extension automatically sets this to the worktree root.
+      // Override only if your Java project root differs from the opened folder:
+      // "workspaceFolders": ["file:///path/to/your/java/project"],
+      "settings": {
+        "java": {
+          "configuration": {
+            "updateBuildConfiguration": "automatic",
+            "runtimes": [],
+            // Path to your Maven settings.xml (for custom/internal repositories)
+            "maven": {
+              "userSettings": "~/.m2/settings.xml"
+            }
+          },
+          "saveActions": {
+            "organizeImports": true
+          },
+          "compile": {
+            "nullAnalysis": {
+              "mode": "automatic"
+            }
+          },
+          "references": {
+            "includeAccessors": true,
+            "includeDecompiledSources": true
+          },
+          "jdt": {
+            "ls": {
+              // Enables Protocol Buffer support for .proto files in the project
+              "protobufSupport": {
+                "enabled": true
+              },
+              // Enables Groovy support for mixed Java/Groovy projects
+              "groovySupport": {
+                "enabled": true
+              },
+              // Enables Kotlin support so JDTLS can resolve Kotlin classes from Java code
+              // in mixed Kotlin/Java projects
+              "kotlinSupport": {
+                "enabled": true
+              },
+              // Enables Scala support for mixed Java/Scala projects
+              "scalaSupport": {
+                "enabled": true
+              },
+              // Enables AspectJ support for projects using aspect-oriented programming
+              "aspectjSupport": {
+                "enabled": true
+              },
+              // Enables Android project support
+              "androidSupport": {
+                "enabled": true
+              },
+              // Enables the javac-based compilation engine instead of the ECJ compiler
+              "javac": {
+                "enabled": true
+              }
+            }
+          },
+          "eclipse": {
+            "downloadSources": true
+          },
+          "maven": {
+            "downloadSources": true,
+            "updateSnapshots": true
+          },
+          "autobuild": {
+            "enabled": true
+          },
+          "maxConcurrentBuilds": 1,
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all"
+            }
+          },
+          "signatureHelp": {
+            "enabled": true,
+            "description": {
+              "enabled": true
+            }
+          },
+          "format": {
+            "enabled": true,
+            "settings": {
+              // The formatter config to use
+              "url": "~/.config/jdtls/palantir_java_jdtls.xml"
+            },
+            "onType": {
+              "enabled": true
+            }
+          },
+          "contentProvider": {
+            "preferred": null
+          },
+          "import": {
+            "gradle": {
+              "enabled": true,
+              "wrapper": {
+                "enabled": true
+              },
+              // JVM used by the Gradle daemon (must be JVM 17+ for modern Gradle).
+              // Set this if your default runtime is a lower version.
+              "java": {
+                "home": "/path/to/your/JDK17+"
+              },
+              "annotationProcessing": {
+                "enabled": true
+              }
+            },
+            "maven": {
+              "enabled": true
+            },
+            "exclusions": [
+              "**/node_modules/**",
+              "**/.metadata/**",
+              "**/archetype-resources/**",
+              "**/META-INF/maven/**",
+              "/**/test/**"
+            ]
+          },
+          "completion": {
+            "enabled": true,
+            "favoriteStaticMembers": [
+              "org.junit.Assert.*",
+              "org.junit.Assume.*",
+              "org.junit.jupiter.api.Assertions.*",
+              "org.junit.jupiter.api.Assumptions.*",
+              "org.junit.jupiter.api.DynamicContainer.*",
+              "org.junit.jupiter.api.DynamicTest.*",
+              "org.mockito.Mockito.*",
+              "org.mockito.ArgumentMatchers.*"
+            ],
+            "importOrder": [
+              "java",
+              "javax",
+              "com",
+              "org"
+            ],
+            "postfix": {
+              "enabled": true
+            },
+            "chain": {
+              "enabled": true
+            },
+            "guessMethodArguments": "insertParameterNames",
+            "overwrite": true
+          },
+          "errors": {
+            "incompleteClasspath": {
+              "severity": "warning"
+            }
+          },
+          "implementationCodeLens": "all",
+          "referencesCodeLens": {
+            "enabled": true
+          }
+        }
+      }
+    }
+  }
+}
