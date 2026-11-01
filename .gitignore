@@ -1,27 +1,133 @@
-# Binaries and build outputs
+# ==============================================================================
+# Binaries and Compiled Outputs
+# ==============================================================================
 bin/
+*/bin/
 dist/
+*/dist/
 build/
+*/build/
 out/
 target/
+.output/
 
-# Node dependencies and cache
+# Go compiled artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Java compiled artifacts
+*.class
+*.war
+*.ear
+*.nar
+*.jar
+!**/gradle/wrapper/gradle-wrapper.jar
+
+# ==============================================================================
+# Dependencies and Package Caches
+# ==============================================================================
+# Node & PNPM
 node_modules/
+*/node_modules/
+.pnpm-store/
+
+# Java & Gradle
+.gradle/
+*/.gradle/
+
+# Go vendor
+vendor/
+
+# Python (tools/skills virtualenvs)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# ==============================================================================
+# Build Caches & Frontend Tooling
+# ==============================================================================
 .vite/
+*/.vite/
+.turbo/
+.cache/
+.parcel-cache/
+
+# ==============================================================================
+# Test Reports, Coverage and Profiling
+# ==============================================================================
+coverage/
+*/coverage/
+.nyc_output/
+*.lcov
+*.out
+*.test
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ==============================================================================
+# Logs and Runtime Diagnostics
+# ==============================================================================
+*.log
+logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
+hs_err_pid*
+replay_pid*
 
-# Java / Gradle
-.gradle/
-*.class
-
-# IDE and OS
-.idea/
-.vscode/
+# ==============================================================================
+# Temporary Files and Local Storage
+# ==============================================================================
+tmp/
+temp/
+*.tmp
+*.temp
+*~
 *.swp
 *.swo
-*~
+
+# Local Docker volumes/data mounts if created on host
+docker-data/
+*.db-journal
+
+# ==============================================================================
+# Environment Configuration and Secrets
+# ==============================================================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+*.crt
+# Preserve example environment files
+!.env.example
+!**/.env.example
+
+# ==============================================================================
+# IDE, Editor, and OS Artifacts
+# ==============================================================================
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.settings/
+.classpath
+.project
+.factorypath
+.springBeans
+.sts4-cache/
+.apt_generated/
 .DS_Store
 Thumbs.db
+ehthumbs.db
